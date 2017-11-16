@@ -10,9 +10,12 @@ class Hero(object):
 class Monster(object):
     def __init__(self):
         self.image = pygame.image.load('images/monster.png')
+        self.x = 53
+        self.y = 50
+        self.speed = 3
     
     def draw(self, screen):
-        screen.blit(self.image, (53, 50))
+        screen.blit(self.image, (self.x, self.y))
     
 def main():
     width = 512
@@ -32,7 +35,6 @@ def main():
         for event in pygame.event.get():
 
             # Event handling
-
             if event.type == pygame.QUIT:
                 stop_game = True
 
@@ -40,13 +42,15 @@ def main():
         # Game logic
 
         # Draw background
-
         screen.blit(background_image, (0, 0))
 
         # Game display
         hero.draw(screen)
         monster.draw(screen)
         pygame.display.update()
+        
+        # Monster movement
+        monster.x += monster.speed
         clock.tick(60)
 
     pygame.quit()
