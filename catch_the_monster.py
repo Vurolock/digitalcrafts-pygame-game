@@ -4,9 +4,18 @@ import random
 class Hero(object):
     def __init__(self):
         self.image = pygame.image.load('images/hero.png')
+        self.x = 240
+        self.y = 224
+        self.base_speed = 2
+        self.speed_x = 0
+        self.speed_y = 0
+    
+    def update(self):
+        self.x += self.speed_x
+        self.y += self.speed_y
 
     def draw(self, screen):
-        screen.blit(self.image, (240, 224))
+        screen.blit(self.image, (self.x, self.y))
 
 class Monster(object):
     def __init__(self):
@@ -41,6 +50,18 @@ def main():
             if event.type == pygame.QUIT:
                 stop_game = True
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN:
+                    hero.speed_y = hero.base_speed
+                elif event.key == pygame.K_UP:
+                    hero.speed_y = -hero.base_speed
+                elif event.key == pygame.K_LEFT:
+                    hero.speed_x = -hero.base_speed
+                elif event.key == pygame.K_RIGHT:
+                    hero.speed_x = hero.base_speed
+            if event.type == pygame.KEYUP:
+                hero.speed_x = 0
+                hero.speed_y = 0
 
         # Game logic
         if monster.x > 472:
@@ -51,6 +72,7 @@ def main():
             monster.y = 20
         if monster.y < 20:
             monster.y = 450
+        hero.update()
         # Draw background
         screen.blit(background_image, (0, 0))
 
@@ -62,7 +84,7 @@ def main():
         # Monster movement
         clock.tick(60)
         timer_count = timer_count + 1
-        #print timer_count
+        print timer_count
         monster.x += monster.speed_x
         monster.y += monster.speed_y
 
