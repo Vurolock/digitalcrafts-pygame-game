@@ -1,6 +1,5 @@
 import pygame
 import random
-#import threading
 
 class Character(object):
     def __init__(self):
@@ -44,14 +43,11 @@ def main():
     monster = Monster()
     stop_game = False
     timer_count = 119
-
     # What happens when hero and monster meet
     def collide():
         print "You caught the monster!"
         screen.blit(background_image, (0, 0))
         hero.draw(screen)
-
-    #move_delay = threading.Timer(0.1, hero.base_speed)
 
     while not stop_game:
         for event in pygame.event.get():
@@ -62,6 +58,7 @@ def main():
             
             # If no keys are pressed hero will not move
             if event.type == pygame.KEYUP:
+
                 if event.key == pygame.K_DOWN: #274
                     hero.speed_y = 0
                 
@@ -81,8 +78,8 @@ def main():
                     hero.speed_y = hero.base_speed
                 
                 elif event.key == pygame.K_UP: 
-                    #hero.speed_y = -move_delay
                     hero.speed_y = -hero.base_speed
+                
                 elif event.key == pygame.K_LEFT: 
                     hero.speed_x = -hero.base_speed
                 
