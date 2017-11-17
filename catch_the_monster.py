@@ -1,5 +1,6 @@
 import pygame
 import random
+#import threading
 
 class Hero(object):
     def __init__(self):
@@ -25,6 +26,7 @@ class Monster(object):
         self.base_speed = 3
         self.speed_x = 0
         self.speed_y = 0
+    
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
     
@@ -42,6 +44,8 @@ def main():
     monster = Monster()
     stop_game = False
     timer_count = 119
+    collide = "You caught the monster!"
+    #move_delay = threading.Timer(0.1, hero.base_speed)
 
     while not stop_game:
         for event in pygame.event.get():
@@ -52,23 +56,31 @@ def main():
             
             # If no keys are pressed hero will not move
             if event.type == pygame.KEYUP:
-                hero.speed_x = 0
-                hero.speed_y = 0
+                if event.key == pygame.K_DOWN: #274
+                    hero.speed_y = 0
+                
+                elif event.key == pygame.K_UP: #273
+                    hero.speed_y = 0
+                
+                elif event.key == pygame.K_LEFT: #276
+                    hero.speed_x = 0
+                
+                elif event.key == pygame.K_RIGHT: #275
+                    hero.speed_x = 0
             
             # Key held in down position will move hero
             if event.type == pygame.KEYDOWN:
-                print event.key
-                
-                if event.key == pygame.K_DOWN: #274
+
+                if event.key == pygame.K_DOWN: 
                     hero.speed_y = hero.base_speed
                 
-                elif event.key == pygame.K_UP: #273
+                elif event.key == pygame.K_UP: 
+                    #hero.speed_y = -move_delay
                     hero.speed_y = -hero.base_speed
-                
-                elif event.key == pygame.K_LEFT: #276
+                elif event.key == pygame.K_LEFT: 
                     hero.speed_x = -hero.base_speed
                 
-                elif event.key == pygame.K_RIGHT: #275
+                elif event.key == pygame.K_RIGHT: 
                     hero.speed_x = hero.base_speed
 
         # Boundary warping
@@ -80,14 +92,14 @@ def main():
             monster.y = 20
         if monster.y < 20:
             monster.y = 450
-        if hero.x > 472:
-            hero.x = 20
-        if hero.x < 20:
-            hero.x = 472
-        if hero.y > 450:
-            hero.y = 20
-        if hero.y < 20:
-            hero.y = 450
+        # if hero.x > 472:
+        #     hero.x = 20
+        # if hero.x < 20:
+        #     hero.x = 472
+        # if hero.y > 450:
+        #     hero.y = 20
+        # if hero.y < 20:
+        #     hero.y = 450
         
         # Updates position of hero every loop
         hero.update()
@@ -142,6 +154,19 @@ def main():
             elif random_direction == 7:
                 monster.speed_y = -monster.base_speed
                 monster.speed_x = -monster.base_speed
+        
+        # Hero collision
+        if hero.x + 24 < monster.x:
+            pass
+        elif monster.x + 24 < hero.x:
+            pass
+        elif hero.y + 24 < monster.y:
+            pass
+        elif monster.y + 24 < hero.y:
+            pass
+        else:
+            print collide
+            break
 
     pygame.quit()
 
