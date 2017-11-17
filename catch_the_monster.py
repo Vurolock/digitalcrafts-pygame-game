@@ -51,13 +51,18 @@ def main():
                 stop_game = True
 
             if event.type == pygame.KEYDOWN:
+
                 if event.key == pygame.K_DOWN:
+                    
                     hero.speed_y = hero.base_speed
                 elif event.key == pygame.K_UP:
+                    
                     hero.speed_y = -hero.base_speed
                 elif event.key == pygame.K_LEFT:
+                    
                     hero.speed_x = -hero.base_speed
                 elif event.key == pygame.K_RIGHT:
+                    
                     hero.speed_x = hero.base_speed
             if event.type == pygame.KEYUP:
                 hero.speed_x = 0
