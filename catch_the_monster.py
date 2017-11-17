@@ -2,33 +2,33 @@ import pygame
 import random
 #import threading
 
-class Hero(object):
+class Character(object):
     def __init__(self):
+        self.speed_x = 0
+        self.speed_y = 0
+    
+    def draw(self, screen):
+        screen.blit(self.image, (self.x, self.y))
+
+class Hero(Character):
+    def __init__(self):
+        super(Hero, self).__init__()
         self.image = pygame.image.load('images/hero.png')
         self.x = 240
         self.y = 224
         self.base_speed = 2
-        self.speed_x = 0
-        self.speed_y = 0
     
     def update(self):
         self.x += self.speed_x
         self.y += self.speed_y
 
-    def draw(self, screen):
-        screen.blit(self.image, (self.x, self.y))
-
-class Monster(object):
+class Monster(Character):
     def __init__(self):
+        super(Monster, self).__init__()
         self.image = pygame.image.load('images/monster.png')
         self.x = 53
         self.y = 50
         self.base_speed = 3
-        self.speed_x = 0
-        self.speed_y = 0
-    
-    def draw(self, screen):
-        screen.blit(self.image, (self.x, self.y))
     
 def main():
     width = 512
@@ -156,13 +156,13 @@ def main():
                 monster.speed_x = -monster.base_speed
         
         # Hero collision
-        if hero.x + 24 < monster.x:
+        if hero.x + 20 < monster.x:
             pass
-        elif monster.x + 24 < hero.x:
+        elif monster.x + 20 < hero.x:
             pass
-        elif hero.y + 24 < monster.y:
+        elif hero.y + 20 < monster.y:
             pass
-        elif monster.y + 24 < hero.y:
+        elif monster.y + 20 < hero.y:
             pass
         else:
             print collide
