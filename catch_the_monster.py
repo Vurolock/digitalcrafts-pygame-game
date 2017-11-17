@@ -44,7 +44,13 @@ def main():
     monster = Monster()
     stop_game = False
     timer_count = 119
-    collide = "You caught the monster!"
+
+    # What happens when hero and monster meet
+    def collide():
+        print "You caught the monster!"
+        screen.blit(background_image, (0, 0))
+        hero.draw(screen)
+
     #move_delay = threading.Timer(0.1, hero.base_speed)
 
     while not stop_game:
@@ -165,8 +171,8 @@ def main():
         elif monster.y + 20 < hero.y:
             pass
         else:
-            print collide
-            break
+            collide()
+            
 
     pygame.quit()
 
