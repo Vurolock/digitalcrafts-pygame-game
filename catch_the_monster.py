@@ -68,26 +68,39 @@ def main():
 
         if timer_count >= 120:
             timer_count = 0
-            random_direction = random.random()
+            random_direction = random.randint(0, 7)
             
-            if random_direction < 0.25:
+            if random_direction == 0:
                 monster.speed_x = -monster.base_speed
                 monster.speed_y = 0
             
-            elif 0.25 <= random_direction < 0.50:
+            elif random_direction == 1:
                 monster.speed_x = monster.base_speed
                 monster.speed_y = 0
             
-            elif 0.50 <= random_direction < 0.75:
+            elif random_direction == 2:
                 monster.speed_y = -monster.base_speed
                 monster.speed_x = 0
             
-            else:
+            elif random_direction == 3:
                 monster.speed_y = monster.base_speed
                 monster.speed_x = 0
 
+            elif random_direction == 4:
+                monster.speed_x = monster.base_speed
+                monster.speed_y = monster.base_speed
+            
+            elif random_direction == 5:
+                monster.speed_y = -monster.base_speed
+                monster.speed_x = monster.base_speed
+            
+            elif random_direction == 6:
+                monster.speed_y = -monster.base_speed
+                monster.speed_x = monster.base_speed
 
-
+            elif random_direction == 7:
+                monster.speed_y = -monster.base_speed
+                monster.speed_x = -monster.base_speed
 
     pygame.quit()
 
